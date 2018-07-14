@@ -8,3 +8,5 @@ bootstrap = Bootstrap()
 db = SQLAlchemy()
 loginmanager = LoginManager()
 mail = Mail()
+
+

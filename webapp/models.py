@@ -1,14 +1,15 @@
-#coding:utf-8
 from webapp.extensions import bcrypt,db,loginmanager
 from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
 
 
+
 tags = db.Table('post_tags',
     db.Column('post_id',db.Integer,db.ForeignKey('post.id')),
     db.Column('tag_id',db.Integer,db.ForeignKey('tag.id'))
     )
+
 
 
 @loginmanager.user_loader
@@ -25,10 +26,7 @@ class User(UserMixin,db.Model):
     password = db.Column(db.String(255))
     birthday =db.Column(db.Date())
     posts = db.relationship('Post',backref = 'user',lazy = 'dynamic')
-    
-
-    
-    
+ 
     def __repr__(self):
         return "<User '{}'>".format(self.username)
 
@@ -83,6 +81,3 @@ class Tag(db.Model):
     
     def __repr__(self):
         return "<Tag '{}'>".format(self.title)
-
-
-

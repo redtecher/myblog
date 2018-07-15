@@ -6,8 +6,30 @@ from webapp.models import User
 from flask import url_for,flash
 from flask_login import login_user,logout_user
 from .forms import LoginForm,RegisterForm
-
+from flask_login import current_user
 from webapp.models import db
+
+
+
+
+@auth.before_app_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.ping()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @auth.route('/login',methods=['GET','POST'])
 def login():
     form =LoginForm()

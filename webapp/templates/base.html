@@ -62,10 +62,11 @@
                     <a class="nav-link page-scroll" href="">Contact</a>
                 </li>
                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                 
                 {% if current_user.is_authenticated%}
-                <li class="nav-item"><a class="nav-link page-scroll" href="">Sign Out &nbsp;&nbsp; </a></li>
+                <li class="nav-item"><a class="nav-link page-scroll" href="{{url_for('auth.logout')}}">Sign Out &nbsp;&nbsp; </a></li>
                 {% else %}
-                <li class="nav-item"><a class="nav-link page-scroll" href="">Sign In  &nbsp;&nbsp; </a></li>
+                <li class="nav-item"><a class="nav-link page-scroll" href="{{url_for('auth.login')}}">Sign In  &nbsp;&nbsp; </a></li>
                 {% endif %}
             </ul>
 

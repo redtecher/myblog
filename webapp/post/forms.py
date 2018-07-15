@@ -7,5 +7,6 @@ class CommentForm(Form):
     content = StringField('内容',validators=[Required(),Length(max=255)])
 
 
-
+class PostForm(Form):
+    
     

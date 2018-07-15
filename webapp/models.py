@@ -2,6 +2,7 @@ from webapp.extensions import bcrypt,db,loginmanager
 from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
+from datetime import datetime
 
 
 
@@ -21,7 +22,11 @@ class User(UserMixin,db.Model):
     
     id =db.Column(db.Integer(),primary_key = True)
     email = db.Column(db.String(64),unique = True,index = True)
-    
+    location = db.Column(db.String(64))
+    about_me = db.Column(db.Text())
+    member_since = db.Column(db.DateTime(),default = datetime.utcnow)
+    last_seen = db.Column(db.DateTime(),default = datetime.utcnow)
+    name = db.Column(db.String(64),unique=True)
     username = db.Column(db.String(255))
     password = db.Column(db.String(255))
     birthday =db.Column(db.Date())
@@ -38,6 +43,12 @@ class User(UserMixin,db.Model):
     
     def check_password(self,password):
         return bcrypt.check_password_hash(self.password,password)
+
+    def ping(self):
+        self.last_seen = datetime.utcnow()
+        db.session.add(self)
+        db.session.commit()
+
 
     
 
@@ -81,3 +92,5 @@ class Tag(db.Model):
     
     def __repr__(self):
         return "<Tag '{}'>".format(self.title)
+
+

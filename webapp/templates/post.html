@@ -1,9 +1,9 @@
-{% extends "base.html"%}
+ {% extends "base.html"%}
 
 {% block title %}title{% endblock %}
 
 
-{% block creater %} <span class="meta">Posted by <a href="#">{{username}}</a> on {{publish_date}}</span>{% endblock %}
+{% block creater %} <span class="meta">Posted by <a href="#" >{{username}}</a> on {{publish_date}}</span>{% endblock %}
 
 
 {% block page_content%}
@@ -14,7 +14,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                   {{text}}
+                   <div class="post-body">
+                       {% if post.body_html%}
+                            {{post.body_html | safe}}
+                       {% else %}
+                            {{ post.text}}
+                       {% endif %}
+                   </div>
                 </div>
             </div>
         </div>

@@ -12,6 +12,13 @@
         <h1>
             {{user.username}}
         </h1>
+        {% if user.headimg %}
+            <img class="img-rounded profile-thumbnail" src='{{ user.headimg }}'>
+        {% else %}
+            <img class="img-rounded profile-thumbnail" src = '/static/headimg/default.jpg'>
+        {% endif %}
+
+
         {% if user.name or user.location %}
         <p>
             {% if user.name%}{{user.name}}{% endif %}
@@ -26,10 +33,15 @@
             <p><a href="mailto:{{ user.email }}">{{user.email}}</a></p>
         {% endif %}
         {% if user.about_me %}<p>{{user.about_me}}</p>{% endif %}
-        <p>
-            Member since{{moment(user.member_since).format('L')}}
-            Last seen{{moment(user.last_seen).fromNow()}}
-        </p>
+        
+        <p>Member since &nbsp; &nbsp;{{ moment(user.member_since).format('L') }}</p>
+          <p>  Last seen &nbsp; &nbsp;{{ moment(user.last_seen).fromNow() }}</p>
+        
+        
+        {% if user == current_user %}
+        <a class="btn btn-default" href="{{url_for('userinfo.edit_profile')}}">修改个人资料</a>
+
+        {% endif %}
 
 
 

@@ -8,6 +8,7 @@ class Config(object):
     MAIL_PASSWORD = 'ewbvioovcwspcaaa' #os.environ.get('MAIL_PASSWORD')
     FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
     FLASKY_MAIL_SENDER = '121674005@qq.com'
+    UPLOAD_FOLDER = os.getcwd()+'/webapp/static/headimg/'
 
     @staticmethod
     def init_app(app):

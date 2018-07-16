@@ -1,6 +1,6 @@
 from flask import Flask,redirect,url_for
 
-from .extensions import bcrypt,db,loginmanager,bootstrap,mail,admin,moment
+from .extensions import bcrypt,db,loginmanager,bootstrap,mail,admin,moment,pagedown
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -13,6 +13,7 @@ def create_app(config_name):
     mail.init_app(app)
     admin.init_app(app)
     moment.init_app(app)
+    pagedown.init_app(app)
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
     

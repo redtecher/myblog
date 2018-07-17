@@ -1,8 +1,8 @@
-"""initial commit
+"""empty message
 
-Revision ID: c7ee98146dc0
+Revision ID: f5ad9498cddc
 Revises: 
-Create Date: 2018-07-14 16:38:49.146231
+Create Date: 2018-07-17 12:34:25.592437
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'c7ee98146dc0'
+revision = 'f5ad9498cddc'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,18 +26,27 @@ def upgrade():
     op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('email', sa.String(length=64), nullable=True),
+    sa.Column('location', sa.String(length=64), nullable=True),
+    sa.Column('about_me', sa.Text(), nullable=True),
+    sa.Column('member_since', sa.DateTime(), nullable=True),
+    sa.Column('last_seen', sa.DateTime(), nullable=True),
+    sa.Column('name', sa.String(length=64), nullable=True),
     sa.Column('username', sa.String(length=255), nullable=True),
     sa.Column('password', sa.String(length=255), nullable=True),
     sa.Column('birthday', sa.Date(), nullable=True),
-    sa.PrimaryKeyConstraint('id')
+    sa.Column('headimg', sa.String(length=128), nullable=True),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('name')
     )
     op.create_index(op.f('ix_user_email'), 'user', ['email'], unique=True)
     op.create_table('post',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=255), nullable=True),
+    sa.Column('subtitle', sa.String(length=255), nullable=True),
     sa.Column('text', sa.Text(), nullable=True),
     sa.Column('publish_date', sa.DateTime(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('body_html', sa.Text(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

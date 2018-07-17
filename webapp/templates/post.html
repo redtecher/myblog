@@ -1,9 +1,9 @@
  {% extends "base.html"%}
 
-{% block title %}title{% endblock %}
+{% block title %}{{post.title}}{% endblock %}
 
 
-{% block creater %} <span class="meta">Posted by <a href="#" >{{username}}</a> on {{publish_date}}</span>{% endblock %}
+{% block creater %} <span class="meta">Posted by <a href="{{url_for('userinfo.user',username=username)}}" >{{username}}</a> on {{publish_date}}</span>{% endblock %}
 
 
 {% block page_content%}

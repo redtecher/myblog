@@ -1,6 +1,6 @@
 {% extends "bootstrap/base.html"%}
 
-{% block title %}Home{% endblock%}
+{% block title %}主页{% endblock%}
 
 {% block metas %}
 <meta charset="utf-8">
@@ -75,7 +75,10 @@
                 {% if current_user.is_authenticated%}
                 <li class="nav-item"><a class="nav-link page-scroll" href="{{url_for('auth.logout')}}">登出 &nbsp;&nbsp; </a></li>
                 {% else %}
+                
+
                 <li class="nav-item"><a class="nav-link page-scroll" href="{{url_for('auth.login')}}"> 登录  &nbsp;&nbsp; </a></li>
+                <li class="nav-item"><a class="nav-link page-scroll" href="{{url_for('auth.register')}}"> 注册  &nbsp;&nbsp; </a></li>
                 {% endif %}
             </ul>
 
@@ -119,7 +122,7 @@
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <ul class="list-inline text-center">
                     <li class="list-inline-item">
-                        <a href="#">
+                        <a href="https://www.facebook.com/profile.php?id=100005139079363">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -127,7 +130,7 @@
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="#">
+                        <a href="https://plus.google.com/u/0/109550871816185365850">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-google fa-stack-1x fa-inverse"></i>
@@ -135,7 +138,7 @@
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="">
+                        <a href="https://github.com/redtecher/myblog">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -143,7 +146,7 @@
                         </a>
                     </li>
                 </ul>
-                <p class="copyright text-muted">Copyright &copy; Your Website 2018. </p>
+                <p class="copyright text-muted">Copyright &copy; redhongc.top 2018. </p>
             </div>
         </div>
     </div>

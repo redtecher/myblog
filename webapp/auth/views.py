@@ -41,7 +41,7 @@ def login():
         flash('Invalid username or password')
 
 
-    return render_template('auth/login.html',form=form,backgroundpic = '/static/img/home-bg.jpg')
+    return render_template('auth/login.html',form=form,backgroundpic = '/static/img/post2_bg.jpg')
 
 
 
@@ -60,7 +60,7 @@ def register():
         flash('You can now login ')
         return redirect(url_for('auth.login'))
 
-    return render_template('auth/register.html',form=form,backgroundpic = '/static/img/about-bg.jpg')
+    return render_template('auth/register.html',form=form,backgroundpic = '/static/img/post1_bg.jpg')
 
 @auth.route('/logout')
 def logout():

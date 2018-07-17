@@ -55,6 +55,7 @@ def register():
         user.set_password(form.password.data)
         user.username = form.username.data
         user.email = form.email.data
+        user.name = form.name.data
         db.session.add(user)
         db.session.commit()
         flash('You can now login ')

@@ -34,8 +34,8 @@
         {% endif %}
         {% if user.about_me %}<p>{{user.about_me}}</p>{% endif %}
         
-        <p>Member since &nbsp; &nbsp;{{ moment(user.member_since).format('L') }}</p>
-          <p>  Last seen &nbsp; &nbsp;{{ moment(user.last_seen).fromNow() }}</p>
+        <p>注册于 &nbsp; &nbsp;{{ moment(user.member_since).format('L') }}</p>
+          <p> 上次登录 &nbsp; &nbsp;{{ moment(user.last_seen).fromNow() }}</p>
         
         
         {% if user == current_user %}

@@ -1,7 +1,7 @@
 from . import post
-from webapp.models import Post,db,User
+from webapp.models import Post,db,User,Comment
 from flask import render_template
-from .forms import PostForm
+from .forms import PostForm,CommentForm
 from flask import redirect,url_for
 from flask_login import current_user
 from datetime import datetime
@@ -10,14 +10,18 @@ from datetime import datetime
 @post.route('/article/<int:post_id>',methods = ['GET','POST'])  #or  '/article/<int:post_id>'
 def article(post_id):
     post = Post.query.filter_by(id = post_id).first()
+    
+    
+
     if post is None:
-        return None
+        return redirect(url_for('.listarticle'))
     else:
         title =post.title 
         text =post.text
         publish_date=post.publish_date
         user_id = post.user_id
         user = User.query.filter_by(id = user_id).first()
+        comments = Comment.query.all()
 
         return render_template('post.html',text = text,username = user.username,publish_date = publish_date,siteheading = title,backgroundpic ='/static/img/post2_bg.jpg',post=post)
 
@@ -39,6 +43,27 @@ def writearticle():
         return redirect(url_for('main.index'))
 
     return render_template('post/writearticle.html',form=form,backgroundpic = '/static/img/post-bg.jpg')
+
+
+@post.route('/article/<int:post_id>/comment',methods = ['GET','POST'])
+def commentarticle(post_id):
+    form = CommentForm()
+    post = Post.query.filter_by(id = post_id).first()
+    if form.validate_on_submit():
+        newcomment = Comment()
+        newcomment.name =current_user.name
+        newcomment.text =form.content.data
+        newcomment.post_id = post.id
+        newcomment.user_id = current_user.id
+        newcomment.date = datetime.now()
+        db.session.add(newcomment)
+        db.session.commit()
+        return redirect(url_for('.commentarticle',post_id = post.id))
+        
+    comments = Comment.query.all()
+    time = datetime.now()
+    
+    return render_template('post/commentarticle.html',time=time,form=form,post=post,comments=comments,backgroundpic = '/static/img/post-bg.jpg')
 
         
 

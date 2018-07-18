@@ -5,9 +5,9 @@ from wtforms.validators import Required,Length
 from flask_pagedown.fields import PageDownField
 
 class CommentForm(Form):
-    subject = StringField('主题',validators=[Required(),Length(max=64)])
+    
     content = StringField('内容',validators=[Required(),Length(max=255)])
-
+    submit = SubmitField('提交')
 
 class PostForm(Form):
     title = TextField('标题')

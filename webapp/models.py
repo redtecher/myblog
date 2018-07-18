@@ -3,7 +3,9 @@ from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
 from datetime import datetime
+
 from markdown import markdown
+
 import bleach
 
 
@@ -33,7 +35,8 @@ class User(UserMixin,db.Model):
     birthday =db.Column(db.Date())
     posts = db.relationship('Post',backref = 'user',lazy = 'dynamic')
     headimg = db.Column(db.String(128),default = None)
- 
+    comments = db.relationship('Comment',backref = 'user',lazy = 'dynamic')
+    
     def __repr__(self):
         return "<User '{}'>".format(self.username)
 
@@ -50,6 +53,9 @@ class User(UserMixin,db.Model):
         self.last_seen = datetime.utcnow()
         db.session.add(self)
         db.session.commit()
+
+
+    
 
 
     
@@ -87,7 +93,7 @@ class Comment(db.Model):
     text = db.Column(db.Text())
     date = db.Column(db.DateTime())
     post_id = db.Column(db.Integer(),db.ForeignKey('post.id'))
-    
+    user_id = db.Column(db.Integer(),db.ForeignKey('user.id'))
     def __repr__(self):
         return "<Comment '{}'>".format(self.text[:15])
     

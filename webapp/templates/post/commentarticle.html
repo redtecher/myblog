@@ -1,0 +1,62 @@
+{% extends 'base.html'%}
+
+
+
+{% block title %}{{post.title}}的评论{% endblock %}
+
+{% block page_content %} 
+
+
+<div class="container">
+    <h3>Comment <span class="label label-default">Here</span></h3>
+{% import "bootstrap/wtf.html" as wtf %}
+
+{{ wtf.quick_form(form)}}
+</div>
+<hr>
+
+
+<div class="container">
+    
+
+
+<ul class="posts">
+{% for comment in comments %}
+    <li class="post">
+<!--
+        <div class="profile-thumbnail">
+            <a href="{{url_for('userinfo.user',username = comment.user.username )}}">
+                <img class="img-rounded profile-thumbnail" src="{{comment.user.headimg}}",height = "5",width = "5"/>
+            </a>
+        </div>
+       
+-->         
+            {{moment(time).fromNow(refresh=True)}}
+        <div class="post-date">{{ moment(comment.date).fromNow(refresh=True)}}</div>
+
+        
+        <div class="post-author">
+            <a href="{{url_for('userinfo.user',username = comment.user.username)}}">
+                {{comment.user.username}}
+            </a>
+        </div>
+        <div class="post-body">{{comment.text}}</div>
+
+    </li>
+    {% endfor %}
+</ul>
+</div>
+
+
+
+
+
+
+
+{% endblock%}
+
+
+{% block newstyles %}
+<link href="/static/css/flaskystyles.css" rel="stylesheet" type="text/css">
+
+{% endblock %}

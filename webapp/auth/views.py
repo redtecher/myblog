@@ -56,6 +56,8 @@ def register():
         user.username = form.username.data
         user.email = form.email.data
         user.name = form.name.data
+        user.headimg = '/static/headimg/default.jpg'
+        user.location = '北京'
         db.session.add(user)
         db.session.commit()
         flash('You can now login ')

@@ -10,8 +10,20 @@ from datetime import datetime
 @post.route('/article/<int:post_id>',methods = ['GET','POST'])  #or  '/article/<int:post_id>'
 def article(post_id):
     post = Post.query.filter_by(id = post_id).first()
-    
-    
+    form = CommentForm()
+    if form.validate_on_submit():
+        newcomment = Comment()
+        newcomment.name =current_user.name
+        newcomment.text =form.content.data
+        newcomment.post_id = post.id
+        newcomment.user_id = current_user.id
+        newcomment.date = datetime.now()
+        db.session.add(newcomment)
+        db.session.commit()
+        return redirect(url_for('.article',post_id = post.id))
+        
+    comments = Comment.query.all()
+    time = datetime.now()
 
     if post is None:
         return redirect(url_for('.listarticle'))
@@ -23,7 +35,7 @@ def article(post_id):
         user = User.query.filter_by(id = user_id).first()
         comments = Comment.query.all()
 
-        return render_template('post.html',text = text,username = user.username,publish_date = publish_date,siteheading = title,backgroundpic ='/static/img/post2_bg.jpg',post=post)
+        return render_template('post.html',form=form,comments=comments,text = text,username = user.username,publish_date = publish_date,siteheading = title,backgroundpic ='/static/img/post2_bg.jpg',post=post)
 
 
 @post.route('/article',methods = ['GET','POST'])

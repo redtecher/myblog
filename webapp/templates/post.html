@@ -26,8 +26,51 @@
         </div>
     </article>
 
-    <hr>
+    <hr><hr>
+    <div class="container">
+        <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+            <h3>Comment <span class="label label-default">Here</span></h3>
+        {% import "bootstrap/wtf.html" as wtf %}
+        
+        {{ wtf.quick_form(form)}}
+
+        </div>
+        </div>
+        <hr><hr>
+        
+        
+        <div class="container">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+        
+        
+        <ul class="posts">
+        {% for comment in comments %}
+            <li class="post">
+        <!--
+                <div class="profile-thumbnail">
+                    <a href="{{url_for('userinfo.user',username = comment.user.username )}}">
+                        <img class="img-rounded profile-thumbnail" src="{{comment.user.headimg}}",height = "5",width = "5"/>
+                    </a>
+                </div>
+               
+        -->         
+                    
+                <div class="post-date">{{ moment(comment.date).fromNow(refresh=True)}}</div>
+        
+                
+                <div class="post-author">
+                    <a href="{{url_for('userinfo.user',username = comment.user.username)}}">
+                        {{comment.user.username}}
+                    </a>
+                </div>
+                <div class="post-body">{{comment.text}}</div>
+        
+            </li>
+            {% endfor %}
+        </ul>
     
+    </div>
+    </div>
 
 
    

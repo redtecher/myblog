@@ -40,7 +40,7 @@ def article(post_id):
 
 @post.route('/article',methods = ['GET','POST'])
 def listarticle():
-    getallpost = Post.query.all()
+    getallpost = Post.query.order_by(Post.publish_date.desc()).all()
     return render_template('listpost.html',allpost=getallpost,backgroundpic = '/static/img/post-bg.jpg')
 
 
@@ -77,7 +77,8 @@ def commentarticle(post_id):
     
     return render_template('post/commentarticle.html',time=time,form=form,post=post,comments=comments,backgroundpic = '/static/img/post-bg.jpg')
 
-        
+
+
 
 
 

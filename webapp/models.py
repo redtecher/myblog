@@ -36,7 +36,7 @@ class User(UserMixin,db.Model):
     posts = db.relationship('Post',backref = 'user',lazy = 'dynamic')
     headimg = db.Column(db.String(128),default = None)
     comments = db.relationship('Comment',backref = 'user',lazy = 'dynamic')
-    
+    messagesboard =db.relationship('Messageboard',backref = 'user',lazy = 'dynamic')
     def __repr__(self):
         return "<User '{}'>".format(self.username)
 
@@ -112,6 +112,16 @@ class Tag(db.Model):
         return "<Tag '{}'>".format(self.title)
 
 db.event.listen(Post.text,'set',Post.on_changed_body)
+
+
+class Messageboard(db.Model):
+    id =db.Column(db.Integer(),primary_key=True)
+    name = db.Column(db.String(255))
+    text = db.Column(db.Text())
+    timestamp = db.Column(db.DateTime())
+    user_id = db.Column(db.Integer(),db.ForeignKey('user.id'))
+    def __repr__(self):
+        return "<Messageboard '{}'>".format(self.text[:15])   
 
 
 

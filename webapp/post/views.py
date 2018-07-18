@@ -22,9 +22,9 @@ def article(post_id):
         db.session.commit()
         return redirect(url_for('.article',post_id = post.id))
         
-    comments = Comment.query.all()
+    comments = Comment.query.filter_by(post_id=post_id).order_by(Comment.date).all()
     time = datetime.now()
-
+    print(comments)
     if post is None:
         return redirect(url_for('.listarticle'))
     else:
@@ -33,7 +33,6 @@ def article(post_id):
         publish_date=post.publish_date
         user_id = post.user_id
         user = User.query.filter_by(id = user_id).first()
-        comments = Comment.query.all()
 
         return render_template('post.html',form=form,comments=comments,text = text,username = user.username,publish_date = publish_date,siteheading = title,backgroundpic ='/static/img/post2_bg.jpg',post=post)
 
@@ -72,7 +71,7 @@ def commentarticle(post_id):
         db.session.commit()
         return redirect(url_for('.commentarticle',post_id = post.id))
         
-    comments = Comment.query.all()
+    comments = Comment.query.filter_by(post_id=post_id).order_by(Comment.date).all()
     time = datetime.now()
     
     return render_template('post/commentarticle.html',time=time,form=form,post=post,comments=comments,backgroundpic = '/static/img/post-bg.jpg')

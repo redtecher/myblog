@@ -73,7 +73,7 @@
                     <a class="nav-link page-scroll" href="{% if current_user.username %}  /userinfo/{{current_user.username}} {% else %} {{url_for('auth.login')}} {% endif%}">个人信息</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link page-scroll" href="">联系</a>
+                    <a class="nav-link page-scroll" href="{{url_for('main.messageboard')}}">留言板</a>
                 </li>
                 
 

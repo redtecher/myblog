@@ -79,7 +79,7 @@ class Post(db.Model):
     
     @staticmethod
     def on_changed_body(target,value,oldvalue,intitiator):
-        allowed_tag = ['a','abbr','acronym','b','blockquote','code','em','i','li','ol','pre','strong','ul','h1','h2','h3','p']
+        allowed_tag = ['a','abbr','acronym','b','blockquote','code','div','em','i','li','ol','pre','strong','table','thead','tbody','tr','th','ul','h1','h2','h3','h4','h5','h6','p',]
         target.body_html = bleach.linkify(bleach.clean(markdown(value,output_html = 'html'),tags=allowed_tag,strip=True))
 
 

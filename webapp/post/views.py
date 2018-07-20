@@ -23,8 +23,8 @@ def article(post_id):
         return redirect(url_for('.article',post_id = post.id))
         
     comments = Comment.query.filter_by(post_id=post_id).order_by(Comment.date).all()
-    time = datetime.now()
-    print(comments)
+    
+    
     if post is None:
         return redirect(url_for('.listarticle'))
     else:
@@ -79,5 +79,28 @@ def commentarticle(post_id):
 
 
 
+@post.route('/article/<int:post_id>/edit',methods=['GET','POST'])
+def editarticle(post_id):
+    post1 = Post.query.filter_by(id = post_id).first()
+    form = PostForm()
+    if current_user == post1.user:
+        if form.validate_on_submit():
+            Post.query.filter_by(id = post_id).update({
+                'text':form.text.data,
+                'subtitle':form.subtitle.data,
+                'title':form.title.data
+            })
+            
+            db.session.commit()
+            return redirect(url_for('main.index'))
+        form.text.data = post1.text
+        form.title.data = post1.title
+        form.subtitle.data = post1.subtitle
+        return render_template('post/editarticle.html',form=form,backgroundpic = '/static/img/post-bg.jpg')
+    else :
+        return redirect(url_for('main.index'))
+    
+            
+    
 
 

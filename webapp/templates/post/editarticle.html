@@ -1,13 +1,80 @@
-{% extends 'base.html' %}
+{% extends 'base.html'%}
 {% block title %}编辑文章{% endblock%}
 
 {% block page_content%}
 
 
-<div class="container">
-    {% import 'bootstrap/wtf.html' as wtf %}
-    {{wtf.quick_form(form)}}
+    
+
+
+<form method="post">
+    {{form.hidden_tag()}}
+    
+    
+        
+    
+    
+    <center><div class="input-group input-group-lg"  style="width:1400px; height:50px; border:none; overflow:hidden;">
+        
+        {{form.title}}
+    </div>
+    </center>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
+    
+    
+        
+    
+    <center>
+    <div class="input-group input-group-lg"  style="width:1400px; height:50px; border:none; overflow:hidden;">
+        
+        {{form.subtitle}}
+    </div>
+</center>
+&nbsp;&nbsp;&nbsp;
+    <div id="test-editormd" class="form-control">
+        {{form.text(class="form-control",style="display:none;",id="ts")}}
+    </div>
+    
+    <div class="container">
+        
+    
+    
+    <button type="submit" class="btn btn-primary form-control" >提交</button>
 </div>
+</form>
+
+{% endblock %}
 
 
-{% endblock%}
+
+
+
+{%block newstyles%}
+    {{super()}}
+        <link rel="stylesheet" href="{{url_for('static',filename='css/editormd.min.css')}}">
+    {%endblock%}
+    {%block scripts%}
+    {{super()}}
+        <script src="{{url_for('static',filename='js/editormd.min.js')}}"></script>
+{%endblock%}
+
+{% block addscripts%}
+<script>
+    var testEditor;
+    $(function(){
+        testEditor=editormd("test-editormd",{
+            width:'1500px',
+            height:'1300px',
+            syncScrolling : "single",
+            path:"{{url_for('static',filename='editormd/lib/')}}",
+            //启动本地图片上传功能
+            imageUpload:true,
+            imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL : "{{url_for('main.upload')}}"
+        });
+    })
+</script>
+
+
+{% endblock %}

@@ -99,6 +99,16 @@ def editarticle(post_id):
         return render_template('post/editarticle.html',form=form,backgroundpic = '/static/img/post-bg.jpg')
     else :
         return redirect(url_for('main.index'))
+
+@post.route('/editormd',methods = ['GET','POST'])
+def editormd():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(text = form.text.data,title =form.title.data,subtitle = form.subtitle.data,user = current_user._get_current_object(),publish_date = datetime.now())
+        db.session.add(post)
+        db.session.commit()
+        return redirect(url_for('main.index'))
+    return render_template('post/editormd.html',form=form,backgroundpic = '/static/img/post-bg.jpg')
     
             
     

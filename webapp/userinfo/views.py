@@ -6,7 +6,7 @@ from flask_login import login_required,current_user
 from .forms import EditMyProfile
 from webapp.models import db
 from flask import request,current_app
-
+from werkzeug.datastructures import ImmutableMultiDict
 @userinfo.route('/<username>')
 def user(username):
     user = User.query.filter_by(username = username).first()
@@ -26,21 +26,27 @@ def edit_profile():
         current_user.birthday = form.birthday.data
         #新增头像功能
         
-        if request.method == 'POST':        
-            headimg = request.files['headimg']
-        
-            fname = headimg.filename
+        if request.method == 'POST': 
+            print(request)
+            print(request.files)
+            if request.files == ImmutableMultiDict([]):
+                
+                current_user.headimg = current_user.headimg
+            else:
+                headimg = request.files['headimg']
+                print(headimg)
+                fname = headimg.filename
+                
+                UPLOAD_FOLDER = current_app.config['UPLOAD_FOLDER']
+                ALLOWED_EXTENSIONS = ['png','jpg','jpeg','gif']
+                flag = '.' in fname and fname.rsplit('.',1)[1] in ALLOWED_EXTENSIONS
+                if not flag :
+                    flash('文件类型错误')
+                    return redirect(url_for('.user',username = current_user.username))
+                headimg.save('{}{}_{}'.format(UPLOAD_FOLDER,current_user.username,fname))
+                current_user.headimg = '/static/headimg/{}_{}'.format(current_user.username,fname)
+                
             
-            UPLOAD_FOLDER = current_app.config['UPLOAD_FOLDER']
-            ALLOWED_EXTENSIONS = ['png','jpg','jpeg','gif']
-            flag = '.' in fname and fname.rsplit('.',1)[1] in ALLOWED_EXTENSIONS
-            if not flag :
-                flash('文件类型错误')
-                return redirect(url_for('.user',username = current_user.username))
-            headimg.save('{}{}_{}'.format(UPLOAD_FOLDER,current_user.username,fname))
-            current_user.headimg = '/static/headimg/{}_{}'.format(current_user.username,fname)
-            
-            current_user.headimg = '/static/headimg/default.jpg'
         
 
 

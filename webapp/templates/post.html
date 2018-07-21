@@ -10,6 +10,7 @@
 {% endblock %}
 
 
+
 {% block page_content%}
 
 
@@ -19,11 +20,14 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                    <div class="post-body">
+                        <article class="markdown-body">
                        {% if post.body_html%}
                             {{post.body_html | safe}}
                        {% else %}
                             {{ post.text}}
                        {% endif %}
+                       </article>
+                    
                    </div>
                 </div>
             </div>
@@ -88,5 +92,21 @@
 
  {% block newstyles %}
  <link href="/static/css/flaskystyles.css" rel="stylesheet" type="text/css">
-
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="/static/css/github-markdown.css">
+ <style>
+     .markdown-body {
+         box-sizing: border-box;
+         min-width: 200px;
+         max-width: 980px;
+         margin: 0 auto;
+         padding: 45px;
+     }
+ 
+     @media (max-width: 767px) {
+         .markdown-body {
+             padding: 15px;
+         }
+     }
+ </style>
  {% endblock %}

@@ -1,6 +1,7 @@
 from flask import Flask,redirect,url_for
-
+import markdown
 from .extensions import bcrypt,db,loginmanager,bootstrap,mail,admin,moment,pagedown
+from flaskext.markdown import Markdown
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -14,6 +15,7 @@ def create_app(config_name):
     admin.init_app(app)
     moment.init_app(app)
     pagedown.init_app(app)
+    Markdown(app)
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
     

@@ -76,12 +76,33 @@ class Post(db.Model):
     tags=db.relationship(
         'Tag',secondary =tags,backref = db.backref('posts',lazy='dynamic')
     )
-    
+    '''
     @staticmethod
     def on_changed_body(target,value,oldvalue,intitiator):
         allowed_tag = ['a','abbr','acronym','b','blockquote','code','div','em','i','li','ol','pre','strong','table','thead','tbody','tr','th','ul','h1','h2','h3','h4','h5','h6','p',]
         target.body_html = bleach.linkify(bleach.clean(markdown(value,output_html = 'html'),tags=allowed_tag,strip=True))
+    '''
+    
+    
 
+    #处理body字段变化的函数
+    @staticmethod
+    def on_changed_post(target,value,oldvalue,initiaor):
+        allow_tags=['a','abbr','acronym','b','blockquote','code',
+                    'em','i','li','ol','pre','strong','ul',
+                    'h1','h2','h3','p','img']
+        #转换markdown为html，并清洗html标签
+        
+
+        target.body_html=bleach.linkify(bleach.clean(
+            markdown(value,output_form='html',extensions = ['extra','codehilite']),
+            tags=allow_tags,strip=True,
+            attributes={
+                '*': ['class'],
+                'a': ['href', 'rel'],
+                'img': ['src', 'alt'],#支持<img src …>标签和属性
+            }
+    ))
 
     def __repr__(self):
         return "<Post '{}'>".format(self.title)
@@ -111,7 +132,7 @@ class Tag(db.Model):
     def __repr__(self):
         return "<Tag '{}'>".format(self.title)
 
-db.event.listen(Post.text,'set',Post.on_changed_body)
+db.event.listen(Post.text,'set',Post.on_changed_post)
 
 
 class Messageboard(db.Model):
@@ -123,7 +144,7 @@ class Messageboard(db.Model):
     def __repr__(self):
         return "<Messageboard '{}'>".format(self.text[:15])   
 
-
+    
 
 
 

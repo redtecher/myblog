@@ -2,7 +2,9 @@ from flask import Flask,redirect,url_for
 import markdown
 from .extensions import bcrypt,db,loginmanager,bootstrap,mail,admin,moment,pagedown
 from flaskext.markdown import Markdown
+from .models import User,Post,Comment,Tag,Messageboard
 
+from .controller.admin import CustomView
 def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object(config_name)
@@ -16,6 +18,8 @@ def create_app(config_name):
     moment.init_app(app)
     pagedown.init_app(app)
     Markdown(app)
+    admin.add_view(CustomView(name='Custom'))
+
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
     
@@ -26,9 +30,10 @@ def create_app(config_name):
     from .post import post as post_blueprint
     app.register_blueprint(post_blueprint,url_prefix = '/post')
     
-    #from .admin import admin as admin_blueprint
-    #app.register_blueprint(admin_blueprint)
     
+    from .controller import controller as controller_blueprint
+    app.register_blueprint(controller_blueprint)
+
     from .userinfo import userinfo as userinfo_blueprint
     app.register_blueprint(userinfo_blueprint,url_prefix = '/userinfo')
 

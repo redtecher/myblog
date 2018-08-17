@@ -15,5 +15,8 @@ class PostForm(Form):
     text = TextAreaField("内容：（使用Markdown的语法）",validators=[Required()])
     submit = SubmitField('提交')
 
+
+
+
     
     

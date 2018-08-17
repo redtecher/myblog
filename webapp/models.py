@@ -70,6 +70,7 @@ class Post(db.Model):
     subtitle = db.Column(db.String(255))
     text = db.Column(db.Text())
     publish_date = db.Column(db.DateTime())
+    private = db.Column(db.Boolean())
     user_id = db.Column(db.Integer(),db.ForeignKey('user.id'))
     comments = db.relationship('Comment',backref = 'post',lazy = 'dynamic')
     body_html =db.Column(db.Text())

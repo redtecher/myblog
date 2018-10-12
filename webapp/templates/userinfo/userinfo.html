@@ -13,9 +13,9 @@
             {{user.username}}
         </h1>
         {% if user.headimg %}
-            <img class="img-rounded profile-thumbnail" src='{{ user.headimg }}'>
+            <img class="img-rounded profile-thumbnail" src='{{ user.headimg }}' style ="width: 100px;height: 100px;">
         {% else %}
-            <img class="img-rounded profile-thumbnail" src = '/static/headimg/default.jpg'>
+            <img class="img-rounded profile-thumbnail" src = '/static/headimg/default.jpg' style ="width: 100px;height: 100px;">
         {% endif %}
 
 

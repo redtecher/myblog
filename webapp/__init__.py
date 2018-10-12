@@ -18,7 +18,7 @@ def create_app(config_name):
     moment.init_app(app)
     pagedown.init_app(app)
     Markdown(app)
-    admin.add_view(CustomView(name='Custom'))
+    # admin.add_view(CustomView(name='Custom'))
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)

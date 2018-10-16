@@ -145,6 +145,14 @@ class Messageboard(db.Model):
     def __repr__(self):
         return "<Messageboard '{}'>".format(self.text[:15])   
 
+
+class Myfeeling(db.Model):
+    id=db.Column(db.Integer(),primary_key=True)
+    text =db.Column(db.Text())
+    user_id = db.Column(db.Integer(),db.ForeignKey('user.id'))
+    timestamp = db.Column(db.DateTime())
+    def __repr__(self):
+        return "<My feeling '{}'>".format(self.text[:15])   
     
 
 

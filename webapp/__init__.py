@@ -39,4 +39,8 @@ def create_app(config_name):
 
     from .myfeeling import myfeeling as myfeeling_blueprint
     app.register_blueprint(myfeeling_blueprint,url_prefix ='/myfeeling')
+
+
+    from .myphotos import myphotos as myphotos_blueprint
+    app.register_blueprint(myphotos_blueprint,url_prefix = '/myphotos')
     return app 

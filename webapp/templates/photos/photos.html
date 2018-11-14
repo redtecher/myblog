@@ -3,22 +3,37 @@
 {% block title%} 我的照片 {% endblock%}
 
 {% block newstyles %}
-
+<link href="/static/css/picture.css" rel="stylesheet">
 
 {% endblock %}
 
 {% block page_content %} 
 
 <div class="stream">
-    <div class = "row">
-        <div class="col-xs-6 col-md-3">
-            <a href="#" class="thumbnail"></a>
-              <img src="../../static/picture/IMG_2365.jpg" alt="西藏">
-            </a>
-          </div>
-    </div>
+        <div class="row">
+                <div class="col-xs-6 col-md-3">
+                  <a href="#" class="thumbnail">
+                    <img src="../../static/picture/IMG_2365.jpg" alt="" class="thumbnailimg">
+                  </a>
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <a href="" class="thumbnail">
+                        <img src="../../static/img/add_picture.jpg" alt="" class="thumbnailimg" onclick="">
+                    </a>
+                </div>
+                
+        </div>
 </div>
 
 
+
+{% endblock %}
+
+{% block addscripts %}
+<script src="/webapp/static/js/masonry.pkgd.min.js"></script>
+<script type="text/javascript">
+    
+
+</script>
 
 {% endblock %}

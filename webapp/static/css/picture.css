@@ -1,0 +1,13 @@
+.grid-item { width: 200px; }
+.grid-item--width2 { width: 400px; }
+
+.stream{
+    margin-left: 60px;
+}
+.thumbnailimg{
+    /* margin-left: 30px; */
+    margin-top: 50px;
+    width: 300px;
+    height: auto;
+
+}

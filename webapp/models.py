@@ -37,6 +37,7 @@ class User(UserMixin,db.Model):
     headimg = db.Column(db.String(128),default = None)
     comments = db.relationship('Comment',backref = 'user',lazy = 'dynamic')
     messagesboard =db.relationship('Messageboard',backref = 'user',lazy = 'dynamic')
+    myphotos=db.relationship('Photos',backref='user',lazy='dynamic')
     def __repr__(self):
         return "<User '{}'>".format(self.username)
 
@@ -158,10 +159,10 @@ class Myfeeling(db.Model):
 
 class Photos(db.Model):
     id= db.Column(db.Integer(),primary_key = True)
-    user_id = user_id = db.Column(db.Integer(),db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer(),db.ForeignKey('user.id'))
     timestamp =  db.Column(db.DateTime())
     pic_url = db.Column(db.Text())
-
+    description =db.Column(db.Text())
     def __repr__(self):
         return "<My Photos '{}'".format(self.text[:15])
     

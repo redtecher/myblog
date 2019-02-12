@@ -1,6 +1,6 @@
 #coding:utf-8
 from flask_wtf import Form
-from wtforms import FileField,TextAreaField
+from wtforms import FileField,TextAreaField,SubmitField
 from wtforms.validators import Required,Length
 from flask_pagedown.fields import PageDownField
 
@@ -17,8 +17,9 @@ from flask_pagedown.fields import PageDownField
 
 
 class PushPicForm(Form):
-    picture = FileField('图片')
+    photo = FileField("图片")
     simpletext  =TextAreaField('简介')
+    submit = SubmitField("上传")
     
     
 

@@ -8,9 +8,11 @@
 {% endblock %}
 
 {% block page_content %} 
-
-
-
+{% import "bootstrap/wtf.html" as wtf %}
+<div  class="container">
+    上传图片
+{{ wtf.quick_form(form)}}
+</div>
 
 {% endblock %}
 

@@ -11,16 +11,14 @@
 
 <div class="stream">
         <div class="row">
+                {% for photo in getallphotos: %}
                 <div class="col-xs-6 col-md-3">
-                  <a href="#" class="thumbnail">
-                    <img src="../../static/picture/IMG_2365.jpg" alt="" class="thumbnailimg">
+                  <a href="/myphotos/{{photo.id}}" class="thumbnail">
+                    <img src="{{photo.pic_url}}" alt="" class="thumbnailimg">
                   </a>
                 </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="" class="thumbnail">
-                        <img src="../../static/img/add_picture.jpg" alt="" class="thumbnailimg" onclick="">
-                    </a>
-                </div>
+
+                {% endfor %}                
                 
         </div>
 </div>

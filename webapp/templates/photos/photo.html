@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title%} 我的照片 {% endblock%}
+
+{% block newstyles %}
+<link href="/static/css/picture.css" rel="stylesheet">
+
+{% endblock %}
+
+{% block page_content %} 
+
+<div class="stream1">
+        
+            <img src="{{singlephoto.pic_url}}" alt="" class="showpic">
+            <h1>由{{username}}上传于{{singlephoto.timestamp}}</h1>
+            <h2>{{singlephoto.description}}</h2>
+
+                  
+</div>
+
+
+
+{% endblock %}
+
+{% block addscripts %}
+<script src="/webapp/static/js/masonry.pkgd.min.js"></script>
+<script type="text/javascript">
+    
+
+</script>
+
+{% endblock %}

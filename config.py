@@ -9,8 +9,9 @@ class Config(object):
     FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
     FLASKY_MAIL_SENDER = '121674005@qq.com'
     UPLOAD_FOLDER = os.getcwd()+'/webapp/static/headimg/'
-    UPLOAD_PIC_FOLDER=os.getcwd()+'/webapp/static/picture'
+    UPLOAD_PHOTOS_FOLDER=os.getcwd()+'/webapp/static/picture/'
     SAVEPIC = 'webapp/static/savepic/'
+    UPLOADED_PHOTOS_DEST =  os.path.join(os.getcwd(),'static/upload/image')
     @staticmethod
     def init_app(app):
         pass

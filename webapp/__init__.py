@@ -3,7 +3,7 @@ import markdown
 from .extensions import bcrypt,db,loginmanager,bootstrap,mail,admin,moment,pagedown
 from flaskext.markdown import Markdown
 from .models import User,Post,Comment,Tag,Messageboard
-
+from flask_uploads import config_for_set,patch_request_class
 from .controller.admin import CustomView
 def create_app(config_name):
     app = Flask(__name__)
@@ -17,6 +17,10 @@ def create_app(config_name):
     admin.init_app(app)
     moment.init_app(app)
     pagedown.init_app(app)
+    
+
+
+
     Markdown(app)
     # admin.add_view(CustomView(name='Custom'))
 

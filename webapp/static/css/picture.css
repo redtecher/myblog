@@ -1,6 +1,10 @@
 .grid-item { width: 200px; }
 .grid-item--width2 { width: 400px; }
+.stream1{
+    width:80%;
+    margin: 0px auto;
 
+}
 .stream{
     margin-left: 60px;
 }
@@ -10,4 +14,9 @@
     width: 300px;
     height: auto;
 
+}
+
+.showpic{
+    width: 100%;
+    margin: 0px auto;
 }

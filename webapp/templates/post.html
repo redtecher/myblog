@@ -5,7 +5,7 @@
 
 {% block creater %} <span class="meta">Posted by <a href="{{url_for('userinfo.user',username=username)}}" >{{username}}</a> on {{publish_date}}</span>
 {% if current_user == post.user %}
-<p class="text-warning"><button type="button" class="btn btn-info" onclick="window.location.href='/article/{{post_id}}/edit'">修改文章</button></p>
+<p class="text-warning"><button type="button" class="btn btn-info" onclick="window.location.href='/article/{{post.id}}/edit'">修改文章</button></p>
 {% endif%}
 {% endblock %}
 

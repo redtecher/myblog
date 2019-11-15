@@ -4,10 +4,10 @@ class Config(object):
     MAIL_SERVER = 'smtp.qq.com'
     MAIL_PORT= 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = '121674005@qq.com' #os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = 'ewbvioovcwspcaaa' #os.environ.get('MAIL_PASSWORD')
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
-    FLASKY_MAIL_SENDER = '121674005@qq.com'
+    FLASKY_MAIL_SENDER = os.environ.get('MAIL_USERNAME')
     UPLOAD_FOLDER = os.getcwd()+'/webapp/static/headimg/'
     UPLOAD_PHOTOS_FOLDER=os.getcwd()+'/webapp/static/picture/'
     SAVEPIC = 'webapp/static/savepic/'
